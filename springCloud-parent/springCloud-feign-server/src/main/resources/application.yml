@@ -1,0 +1,32 @@
+server:
+  port: 7074  #该服务端口号
+  address: localhost
+spring:
+  application:
+    name: feign  #该服务的服务名称  (同一个服务名不同端口号服务的可以被负载均衡使用)
+
+
+#下面这段服务是把该服务（feign）注册到eureka
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 5      # 心跳时间，即服务续约间隔时间（缺省为30s） 表示eureka client发送心跳给server端的间隔时间。
+    lease-expiration-duration-in-seconds: 15  # 发呆时间，即服务续约到期时间（缺省为90s） server至上次接受到client心跳之后在15秒之内没收到心跳则摘除该instance
+                                              
+  client:
+    registry-fetch-interval-seconds: 10 # 拉取服务注册信息间隔（缺省为30s）
+    service-url:
+      defaultZone: http://localhost:7070/eureka/   #注册中心服务地址。把feign 注册到这个注册中心，如果Eurkea集群的话，在后面加逗号分隔
+    healthcheck: 
+      enabled: true # 开启健康检查（依赖spring-boot-starter-actuator）
+      
+#开启hystrix配置   (断路器)   
+feign:
+  hystrix:
+    enabled: true
+    
+loginUrl: http://${server.address}:${server.port}/web/login/index.html
+ 
+# 输出日志信息    
+#logging:
+#  level: 
+#    com.netflix: DEBUG     

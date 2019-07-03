@@ -1,0 +1,18 @@
+server:
+  port: 7072  #该服务端口号
+spring:
+  application:
+    name: order  #该服务的服务名称  (同一个服务名不同端口号服务的可以被负载均衡使用)
+
+
+#下面这段服务是把该服务（order）注册到eureka
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 5      # 心跳时间，即服务续约间隔时间（缺省为30s）
+    lease-expiration-duration-in-seconds: 15  # 发呆时间，即服务续约到期时间（缺省为90s）
+  client:
+    registry-fetch-interval-seconds: 10 # 拉取服务注册信息间隔（缺省为30s）
+    service-url:
+      defaultZone: http://localhost:7070/eureka/   #注册中心服务地址。把server1 注册到这个注册中心
+    healthcheck: 
+      enabled: true # 开启健康检查（依赖spring-boot-starter-actuator）

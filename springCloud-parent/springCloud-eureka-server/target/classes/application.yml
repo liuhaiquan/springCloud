@@ -1,0 +1,28 @@
+server:
+  port: 7070
+    
+eureka: 
+  instance:
+    hostname: localhost
+  server:
+    #关闭自我保护模式（默认为打开） 建议生产环境开启。本地调试模式关闭此选项。调试模式容易触发注册中心的保护机制
+    enable-self-preservation: false  
+    #eviction-interval-timer-in-ms: eureka server清理无效节点的时间间隔，默认60000毫秒，即60秒。
+    #服务下线存在两种情况，一种是客户端主要发送“服务下线”的请求，另外一种是通过定时任务扫描，每隔固定的时间清理无效的节点信息。
+    #清理无效节点的策略由客户端决定，客户端节点会设置相应的上报时间和最大超时时间（最大超时时间必须超过上报时间，推介设置为3倍关系），
+    #eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance。
+    eviction-interval-timer-in-ms: 5000  # 续期时间，即eureka server清理无效节点的时间间隔（缺省为60*1000ms）
+
+
+ 
+  client:
+    #register-with-eureka:表示是否注册自身到eureka服务器
+    register-with-eureka: false   
+    #是否从eureka上获取注册信息   
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/  #注册中心地址。其他服务注册到这个地址上
+      spring:
+        application:
+      name: service
+   

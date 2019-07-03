@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.kavin</groupId>
+    <artifactId>springCloud-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>springCloud-feign-server</artifactId>
+  <name>springCloud-feign-server</name>
+  <description>feign的应用</description>
+  
+
+  
+  <dependencies>
+  
+		<!-- 声明式的伪Http客户端   feign -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
+		</dependency>
+		
+		<!-- 用于设置客户端的健康状态信息 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		
+  </dependencies>  
+  
+</project>

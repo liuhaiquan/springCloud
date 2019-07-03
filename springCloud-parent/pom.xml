@@ -1,0 +1,92 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.kavin</groupId>
+  <artifactId>springCloud-parent</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  
+  <!-- 通过继承spring-boot-starter-parent项目来获得一些合理的默认配置.例如下面的依赖就可以不用指定版本（version），使用它给指定的默认版本 -->
+     <parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.6.RELEASE</version>
+	</parent>
+	
+
+	
+	<!-- 　dependencyManagement  和   dependencies 的却别？
+			（1）dependencyManagement里只是声明依赖，并不实现引入，因此子项目需要显式的声明需要用的依赖。
+								  如果不在子项目中声明依赖，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，
+								  并且没有指定具体版本，才会从父项目中继承该项，并且version和scope都读取自父pom;
+								  另外如果子项目中指定了版本号，那么会使用子项目中指定的jar版本。
+　　			  （2）dependencies即使在子模块中不写该依赖项，那么子模块仍然会从父项目中继承该依赖项（全部继承）。 -->
+	<dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Dalston.SR3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+
+	
+	
+	<!-- 子模块会继承  dependencies 的jar 。dependencies 里面的jar会引入进来并被子模块继承-->
+	<dependencies>
+	    <!-- 本地项目作为jar包引入 -->
+		<dependency>
+			  <groupId>com.kavin</groupId>
+			  <artifactId>springCloud-core</artifactId>
+			  <version>0.0.1-SNAPSHOT</version>
+ 		 </dependency>
+  
+  		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-devtools</artifactId>
+		    <optional>true</optional>
+		</dependency>
+
+
+	</dependencies>
+	<!-- 子模块 -->
+ 	<modules>
+	  	<module>springCloud-eureka-server</module>
+	  	<module>springCloud-order-server</module>
+	  	<module>springCloud-order1-server</module>
+	  	<module>springCloud-zuul-server</module>
+	  	<module>springCloud-ucenter-server</module>
+	  	<module>springCloud-feign-server</module>
+	  	<module>springCloud-config-server</module>
+	  	<module>springCloud-config-client</module>
+	  	<module>springCloud-config-client1</module>
+ 	</modules> 
+  
+    <build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+  
+</project>

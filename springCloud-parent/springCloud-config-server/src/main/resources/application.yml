@@ -1,0 +1,43 @@
+server:
+  port: 7076  #该服务端口号
+spring:
+  application:
+    name: config-server  #该服务的服务名称  (同一个服务名不同端口号服务的可以被负载均衡使用) 
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/liuhaiquan/springCloud-config.git   #仓库地址
+          searchPaths: config  #如果配置文件放置在Git存储库的根目录下，则无需使用searchPaths参数，本例中的配置文件在config目录中，因此使用searchPaths参数提示仓库下搜索config子目录。
+          username: 603552334@qq.com   #码云账号
+          password: lhq940502          #码云密码
+          basedir: D:\\gitee\\temp  #改本地仓库clone的配置文件信息的路径
+          
+  #此处设置 rabbitmq 用于消息总线       
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest        
+            
+          
+#关闭权限验证 
+management:
+  security:
+    enabled: false             
+
+#关闭Spring Security，否则访问仓库文件需要输入Security 账号密码。默认是  user/密码在控制台打印出来
+security:
+  basic:
+    enabled: false
+          
+#下面这段服务是把该服务（config-server）注册到eureka
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 5      # 心跳时间，即服务续约间隔时间（缺省为30s） 表示eureka client发送心跳给server端的间隔时间。
+    lease-expiration-duration-in-seconds: 15  # 发呆时间，即服务续约到期时间（缺省为90s） server至上次接受到client心跳之后在15秒之内没收到心跳则摘除该instance
+                                              
+  client:
+    registry-fetch-interval-seconds: 10 # 拉取服务注册信息间隔（缺省为30s）
+    service-url:
+      defaultZone: http://localhost:7070/eureka/   #注册中心服务地址。把feign 注册到这个注册中心，如果Eurkea集群的话，在后面加逗号分隔

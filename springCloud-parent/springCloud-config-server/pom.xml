@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.kavin</groupId>
+    <artifactId>springCloud-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>springCloud-config-server</artifactId>
+  
+  	<dependencies>
+  		<!-- 配置中心依赖 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-server</artifactId>
+		</dependency>
+		
+		<!--添加配置中心的安全保护依赖  -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-security</artifactId>
+	    </dependency>
+	    
+	    <!-- 消息总线   
+				Spring Cloud Bus 将分布式的节点用轻量的消息代理连接起来。
+				它可以用于广播配置文件的更改或者服务之间的通讯，也可以用于监控。
+				本文要讲述的是用Spring Cloud Bus实现通知微服务架构的配置文件的更改。
+				
+				用于广播的所有config-client 都需要加入此依赖
+		-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
+		</dependency>
+	    
+		
+	</dependencies>	
+  
+</project>

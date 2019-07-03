@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: springCloud-order1-server
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Administrator
+Implementation-Vendor-Id: com.kavin
+Build-Jdk: 1.8.0_60
+Implementation-URL: http://projects.spring.io/spring-boot/springCloud-
+ parent/springCloud-order1-server/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

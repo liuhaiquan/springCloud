@@ -1,0 +1,29 @@
+server:
+  port: 7075  #该服务端口号
+spring:
+  application:
+    name: zuul  #该服务的服务名称  (同一个服务名不同端口号服务的可以被负载均衡使用)
+
+
+#下面这段服务是把该服务（zuul）注册到eureka
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 5      # 心跳时间，即服务续约间隔时间（缺省为30s）
+    lease-expiration-duration-in-seconds: 15  # 发呆时间，即服务续约到期时间（缺省为90s）
+  client:
+    registry-fetch-interval-seconds: 10 # 拉取服务注册信息间隔（缺省为30s）
+    service-url:
+      defaultZone: http://localhost:7070/eureka/   #注册中心服务地址。把zuul 注册到这个注册中心
+      
+      
+#zuul:      #路由规则的配置
+#  routes:
+#    api-a:   #随便命名的
+#      path: /api-ucenter/**   #地址中存在api-ucenter的请求都转发到 ucenter这个服务上 。到ucenter去请求**的mapping
+#      service-id: ucenter  #被转发的服务ID
+#    api-b:    
+#      path: /api-order/**
+#      service-id: order
+
+
+loginUrl: http://localhost:${server.port}/web/login/index.html
